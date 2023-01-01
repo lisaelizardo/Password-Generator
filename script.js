@@ -1,61 +1,75 @@
-// Assignment Code
-var generateBtn = document.querySelector("#generate");
+// Assignment code here
+    var uppercasestring = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var lowercasestring= 'abcdefghijklmnopqrstuvwxyz';
+    var numericstring = '0123456789';
+    let userchoice = []
+    //var random = Math.floor(Math.random() * options.length);
 
-var characterAmountNumber = document.getElementById
-('characterAmountNumber')
-var includeUppercase = document.getElementById
-('includeUppercase')
-var includeLowercase = document.getElementById
-('includeLowercase')
-var includeNumbers = document.getElementById
-('includeNumbers')
-var includeSpecialCharaters = document.getElementById
-('includeSpecialCharaters')
+    document.getElementById("up");
+    document.getElementById("low");
+    document.getElementById("num");
 
-var Special = document.getElementById("passwordGeneratorSpecial")
 
-var uppercase_char_codes = arrayFromLowToHigh (65, 90)
-var lowercase_char_codes = arrayFromLowToHigh (97, 122)
-var number_char_codes = arrayFromLowToHigh (48, 57)
-var symbol_char_codes = arrayFromLowToHigh (33, 47).concat(
-  arrayFromLowToHigh(58, 64)
-)
+    var generateBtn = document.querySelector("#generate");
 
-Form.addEventListener("click", function(e) {
-  e.preventDefault()
-  var characterAmount = characterAmountNumber.value
-  var includeUppercase = includeUppercaseElement.checked
-  var includeLowercase = includeLowercaseElement.checked
-  var includeNumbers = includeNumbersElement.checked
-  var includeSpecialCharacters = includeSpecialCharactersElement.checked
-  var password = generatePassword(characterAmount, includeLowercase, 
-    includeUppercase, includeNumbers, includeSpecialCharacters);
-});
-// Write password to the #password input
-function genPassword(characterAmountNumber, includeLowercase, includeUppercase, includeNumbers, includeSpecialCharacters) {
-  var passwordText = document.querySelector("#password");
-  let charCodes = lowercase_char_codes
-  if (includeUppercase) charCodes = charCodes.concat(uppercase_char_codes)
-  if (includeSpecialCharaters) charCodes = charCodes.concat(symbol_char_codes)
-  if (includeNumbers) charCodes = charCodes.concat (number_char_codes)
+//var btn = document.querySelector('#generate');
 
-  var passwordCharacters = []
-  for (let i = 0; i <characterAmount, i++)
-  var characterCode = charCodes[Math.floor(Math.random() * charCodes.length)]
-  passwordCharacters.push(String.fromCharCode(characterCode))
+var passwordText = document.querySelector("#password");
 
-}
+//function criteria(el) {
+//if (el.id('up') == checked) {
+//     el.pwCharSelection = uppercase.variable};
+//   if (el.id('low') == checked) {
+//     el.pwCharSelection = pwCharSelection + lowercase.variable};
+//   if (el.id('num') == checked) {
+//     el.pwCharSelection = pwCharSelection + numeric.variable};
+// };
 
-function arrayFromLowToHigh(low, high) {
-  var array = []
-  for (let i = low; i <= high; i++) {
-    array.push(i)
+function randomPassword(length) {
+  console.log(userchoice)
+  let randomPassword = ""
+  for(let i = 0; i < length; i++) {
+    let index = Math.floor(Math.random() * userchoice.length)
+    let randomCharacter = userchoice[index]
+    randomPassword = randomPassword+ randomCharacter
   }
-  return array
+  passwordText.value = randomPassword
+
+}
+function generatePassword(length) {
+let lowercase = window.confirm("Do you want lowercase?")
+if (lowercase === true) {
+  userchoice = userchoice.concat(lowercasestring.split(""))
+}
+console.log(userchoice)
+
+let uppercase = window.confirm("Do you want uppercase?")
+if (uppercase === true) {
+  userchoice = userchoice.concat(uppercasestring.split(""))
 }
 
-document.getElementById("password").value = password;
+let numeric = window.confirm("Do you want numeric?")
+if (numeric === true) {
+  userchoice = userchoice.concat(numericstring.split(""))
+}
+randomPassword(length)
+}
 
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+function startPasswordGenerator() {
+  let passwordLngth= window.prompt("Enter Password Length")
+  if (passwordLngth < 8) { alert ("Your password is to short"); return;}
+  if (passwordLngth > 128) { alert ("Your password is to long"); return;}
+
+
+  generatePassword(passwordLngth)
+    // for (var c = 0; c < passwordText.length; c++) {
+    //     //var password = "";
+    //     password = password + pwCharSelection.slice(random, 1);
+    //   console.log(passwordText)
+    // };
+    //var password = passLength + passwordText;
+  //passwordText.value = password;
+};
+
+generateBtn.addEventListener('click', startPasswordGenerator)
