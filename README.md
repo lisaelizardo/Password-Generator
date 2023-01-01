@@ -9,11 +9,3 @@ It includes checkboxes for what may be used in the password and the length of th
 https://lisaelizardo.github.io/Password-Generator/
 
 The webpage above is the link to the Password Generator.
-
-generateBtn.addEventListener('click', (e) => {
-  var checkboxes = document.querySelectorAll('input[name="criteria"]:checked');
-  var values = [];
-  checkboxes.forEach((checkbox) => {
-    values.push(checkbox.value);
-  });
-});
